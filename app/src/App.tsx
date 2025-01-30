@@ -10,12 +10,38 @@ import Header from './components/Header';
 import HeaderMenu from './components/HeaderMenu';
 import FooterMenu from './components/FooterMenu';
 
+import HitSale from './components/HitSale';
+
 
 const RouteFish = () => {
   return(
     <div>
       <h1>Fish</h1>
     </div>
+  );
+}
+
+
+
+const IndexPage = ({children}) => {
+  return(
+    <main className="container">
+      <div className="row">
+        <div className="col">
+          { children }
+          <HitSale/>
+          <section className="catalog">
+            <h2 className="text-center">Каталог</h2>
+            <div className="preloader">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
   );
 }
 
@@ -29,7 +55,7 @@ function App() {
         <HeaderMenu/>
       </Header>
       <Routes>
-            <Route path="/" exact element={<RouteFish />} />
+            <Route path="/" exact element={<IndexPage ><DefaultBanner/></IndexPage >} />
             <Route path="/catalog.html" element={<RouteFish />} />
             <Route path="/about.html" element={<AboutPage><DefaultBanner/></AboutPage>} />
             <Route path="/contacts.html" element={<ContactsPage><DefaultBanner/></ContactsPage>} />
