@@ -11,6 +11,8 @@ import HeaderMenu from './components/HeaderMenu';
 import FooterMenu from './components/FooterMenu';
 
 import HitSale from './components/HitSale';
+import CatalogSection from './components/CatalogSection';
+import CatalogCategories from './components/CatalogCategories';
 
 
 const RouteFish = () => {
@@ -30,15 +32,9 @@ const IndexPage = ({children}) => {
         <div className="col">
           { children }
           <HitSale/>
-          <section className="catalog">
-            <h2 className="text-center">Каталог</h2>
-            <div className="preloader">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </section>
+          <CatalogSection>
+            <CatalogCategories/>
+          </CatalogSection>
         </div>
       </div>
     </main>

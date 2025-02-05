@@ -34,10 +34,8 @@ export const hitSalesSlice = createSliceWithThunk({
                     const apiPath = import.meta.env.VITE_API_URL + "/api/top-sales";
                     const response = await fetch(apiPath);
 
-                    console.log(apiPath);
-
                     if(!response.ok) {
-                        return rejectWithValue("Loading film API error!");
+                        return rejectWithValue("Loading error!");
                     }
 
                     return await response.json();
