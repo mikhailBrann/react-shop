@@ -29,12 +29,12 @@ const CatalogSection = ({children}) => {
 
     return(
         <section className="top-catalog">
-            {catalogListLoading && (<><h2 className="text-center">Каталог</h2><Preloader/></>)}
+            <h2 className="text-center">Каталог</h2>
+            {children}
+            {catalogListLoading && (<Preloader/>)}
             {catalogListError && <p>{catalogListError}</p>}
             {catalogList.length > 0 && (
                 <>
-                <h2 className="text-center">Каталог</h2>
-                {children}
                 <div className="row">
                     {catalogList.map((item) => (
                         <GoodItem item={item} key={uniqid()}/>     

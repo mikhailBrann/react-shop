@@ -2,6 +2,8 @@ import uniqid from 'uniqid';
 import PriceFormat from './PriceFormat';
 
 const GoodItem = ({item}) => {
+    const detailPagePath = `/products/${item.id}.html`;
+
     return(
     <div className="col-4" >
         <div className="card" key={uniqid()}>
@@ -11,7 +13,7 @@ const GoodItem = ({item}) => {
             <div className="card-body">
                 <p className="card-text">{item.title}</p>
                 <p className="card-text"><PriceFormat price={item.price}/></p>
-                <a href="/products/1.html" className="btn btn-outline-primary">Заказать</a>
+                <a href={detailPagePath} className="btn btn-outline-primary">Заказать</a>
             </div>
         </div>
     </div>

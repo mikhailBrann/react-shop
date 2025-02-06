@@ -113,6 +113,9 @@ export const catalogSectionSlice = createSliceWithThunk({
         },
         setCatalogListCurrentCategory: (state, action: PayloadAction<number>) => {
             state.catalogListCurrentCategory = action.payload;
+            state.catalogListOffset = 0;
+            state.catalogList = [];
+            state.catalogListMoreGoods = false;
         },
         setCatalogCategoryList: (state, action: PayloadAction<any>) => {
             state.catalogCategoryList = action.payload;

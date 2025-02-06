@@ -1,12 +1,12 @@
 import uniqid from 'uniqid';
 import { useAppDispatch, useAppSelector } from '../hooks/defaultHook.tsx';
-import { useEffect } from 'react';
-import { catalogSectionSlice } from "../redux/slices/CatalogSectionSlice";
+import { fetchCatalog, catalogSectionSlice } from "../redux/slices/CatalogSectionSlice";
 
 const CatalogCategories = () => {
     const { 
         catalogCategoryList, 
-        catalogListCurrentCategory 
+        catalogListCurrentCategory,
+        catalogListOffset 
     } = useAppSelector((state) => state.catalogSection);
     const dispatch = useAppDispatch();
     const getCategories = async () => {
@@ -19,6 +19,7 @@ const CatalogCategories = () => {
         const categoryId = parseInt(event.currentTarget?.dataset?.id);
 
         dispatch(catalogSectionSlice.actions.setCatalogListCurrentCategory(categoryId));
+        dispatch(fetchCatalog(`offset=${catalogListOffset}&categoryId=${categoryId}`));
     }
 
     if(catalogCategoryList?.length === 0) {
@@ -54,24 +55,5 @@ const CatalogCategories = () => {
     );
 }
 
-//         <ul className="catalog-categories nav justify-content-center">
-//             <li className="nav-item">
-//                 <a className="nav-link active" href="#">Все</a>
-//             </li>
-//             <li className="nav-item">
-//                 <a className="nav-link" href="#">Женская обувь</a>
-//             </li>
-//             <li className="nav-item">
-//                 <a className="nav-link" href="#">Мужская обувь</a>
-//             </li>
-//             <li className="nav-item">
-//                 <a className="nav-link" href="#">Обувь унисекс</a>
-//             </li>
-//             <li className="nav-item">
-//                 <a className="nav-link" href="#">Детская обувь</a>
-//             </li>
-//         </ul>
-//     ); 
-// }
 
 export default CatalogCategories;
