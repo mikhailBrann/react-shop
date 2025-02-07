@@ -1,4 +1,5 @@
 import uniqid from 'uniqid';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/defaultHook.tsx';
 import { fetchCatalog, catalogSectionSlice } from "../redux/slices/CatalogSectionSlice";
 
@@ -8,6 +9,10 @@ const CatalogCategories = () => {
         catalogListCurrentCategory,
         catalogListOffset 
     } = useAppSelector((state) => state.catalogSection);
+    const {
+        setCatalogListCurrentCategory,
+        setCatalogListOffset
+    } = catalogSectionSlice.actions;
     const dispatch = useAppDispatch();
     const getCategories = async () => {
         const request = await fetch(`${import.meta.env.VITE_API_URL}/api/categories`);
@@ -18,13 +23,14 @@ const CatalogCategories = () => {
         event.preventDefault();
         const categoryId = parseInt(event.currentTarget?.dataset?.id);
 
-        dispatch(catalogSectionSlice.actions.setCatalogListCurrentCategory(categoryId));
-        dispatch(fetchCatalog(`offset=${catalogListOffset}&categoryId=${categoryId}`));
+        dispatch(setCatalogListCurrentCategory(categoryId));
+        dispatch(setCatalogListOffset(0));
+        dispatch(fetchCatalog(`offset=0&categoryId=${categoryId}`));
     }
 
-    if(catalogCategoryList?.length === 0) {
+    useEffect(() => {
         getCategories();
-    }
+    }, []);
 
 
     return(

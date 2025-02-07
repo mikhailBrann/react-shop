@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import IndexPage from './components/IndexPage';
+import CatalogPage from './components/CatalogPage';
 import GoodDetailPage from './components/GoodDetailPage';
 import AboutPage from './components/AboutPage';
 import Page404 from './components/Page404';
@@ -36,7 +37,7 @@ function App() {
       </Header>
       <Routes>
             <Route path="/" exact element={<IndexPage ><DefaultBanner/></IndexPage >} />
-            <Route path="/catalog.html" element={<RouteFish />} />
+            <Route path="/catalog.html" element={<CatalogPage><DefaultBanner/></CatalogPage>} />
             <Route path="/products/:id.html" element={<GoodDetailPage><DefaultBanner/></GoodDetailPage>} />
             <Route path="/about.html" element={<AboutPage><DefaultBanner/></AboutPage>} />
             <Route path="/contacts.html" element={<ContactsPage><DefaultBanner/></ContactsPage>} />

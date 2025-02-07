@@ -12,6 +12,7 @@ export type CatalogSectionStateType = {
     catalogListCurrentCategory: number,
     catalogListMoreGoods: boolean,
     catalogCategoryList: [],
+    catalogListSearchQuery: string,
 };
 
 const initialState: CatalogSectionStateType = {
@@ -22,6 +23,7 @@ const initialState: CatalogSectionStateType = {
     catalogListCurrentCategory: 0,
     catalogListMoreGoods: true,
     catalogCategoryList: [],
+    catalogListSearchQuery: '',
 };
 const createSliceWithThunk = buildCreateSlice({
     creators: { asyncThunk: asyncThunkCreator },
@@ -88,16 +90,23 @@ export const catalogSectionSlice = createSliceWithThunk({
                     }
 
                     
+                    
+                    state.catalogListError = "";
+                    
                     //goods count check
                     if(action.payload?.length && action.payload.length < defaultGoodsCount) {
                         state.catalogListMoreGoods = false;
                     } else {
                         state.catalogListMoreGoods = true;
                     }
+
+                    if(action.payload?.length <= 0) {
+                        state.catalogListMoreGoods = false;
+                        return;
+                    }
                     
 
                     state.catalogList = [...state.catalogList, ...action.payload];
-                    state.catalogListError = "";
                     return;
                 },                
                 rejected: (state, action: PayloadAction<any>) => {

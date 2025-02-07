@@ -13,8 +13,12 @@ const CatalogSection = ({children}) => {
         catalogListError,
         catalogListOffset,
         catalogListCurrentCategory,
-        catalogListMoreGoods
+        catalogListMoreGoods,
+        catalogListSearchQuery
     } = useAppSelector((state) => state.catalogSection);
+    const {
+        setCatalogListOffset
+    } = catalogSectionSlice.actions;
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -23,8 +27,9 @@ const CatalogSection = ({children}) => {
 
     const handleShowMore = () => {
         const newValue = catalogListOffset + parseInt(import.meta.env.VITE_DEFAULT_GOODS_COUNT);
+
         dispatch(fetchCatalog(`offset=${newValue}&categoryId=${catalogListCurrentCategory}`));
-        dispatch(catalogSectionSlice.actions.setCatalogListOffset(newValue));
+        dispatch(setCatalogListOffset(newValue));
     }
 
     return(

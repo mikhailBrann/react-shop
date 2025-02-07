@@ -21,13 +21,24 @@ const GoodDetailItem = ({item}) => {
     const [goodCount, setGoodCount] = useState(1);
 
     useEffect(() => {
-        const img = new Image();
+        const checkAndLoadImage = async () => {
+            try {
+                const staticPath = item?.images[0].match(/\/img.*/)[0];
+                const response = await fetch(staticPath);
 
-        img.src = item.images[0];
-        img.onload = () => {
-            setimagePath(item.images[0]);
-            setIsLoadingPic(false);
+                if (!response.ok) {
+                    setIsLoadingPic(item.images[0]);
+                }
+
+                setimagePath(staticPath);
+            } catch (error) {
+                setIsLoadingPic(item.images[0]);
+            } finally {
+                setIsLoadingPic(false);
+            }
         };
+      
+        checkAndLoadImage();
     }, []);
 
     const handleSizeClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -37,18 +48,26 @@ const GoodDetailItem = ({item}) => {
             setSelectedSize(newValue);
         }
     }
-    const handleCountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleCountChange = (event: React.MouseEvent<HTMLButtonElement>) => {
         const elem = event.currentTarget;
         const direction = elem.dataset.direction ?? '';
 
         switch (direction) {
             case 'add':
+                if(goodCount >= 10) {
+                    break;
+                }
+
                 setGoodCount(goodCount + 1);
                 break;
             case 'remove':
-                if (goodCount > 1) {
-                    setGoodCount(goodCount - 1);
+                if (goodCount <= 1) {
+                    break;
                 }
+
+                setGoodCount(goodCount - 1);                
+                break;
+            default:
                 break;
         }
     }
@@ -91,10 +110,19 @@ const GoodDetailItem = ({item}) => {
                         </p>
                     )}
 
-                    <p>Количество: <span className="btn-group btn-group-sm pl-2">
-                            <button className="btn btn-secondary">-</button>
-                            <span className="btn btn-outline-primary">1</span>
-                            <button className="btn btn-secondary">+</button>
+                    <p>Количество: 
+                        <span className="btn-group btn-group-sm pl-2">
+                            <button className="btn btn-secondary" 
+                                data-direction="remove"
+                                onClick={handleCountChange}>
+                                -
+                            </button>
+                            <span className="btn btn-outline-primary">{goodCount}</span>
+                            <button className="btn btn-secondary" 
+                                data-direction="add"
+                                onClick={handleCountChange}>
+                                +
+                            </button>
                         </span>
                     </p>
                 </div>
