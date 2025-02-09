@@ -19,11 +19,7 @@ const GoodItem = ({item}) => {
                     setimagePath(item.images[0]);
                 }
 
-                setTimeout(() => {
-                    setimagePath(staticPath);
-                }, 1000);
-        
-                
+                setimagePath(staticPath);
             } catch (error) {
                 // В случае ошибки также используем GitHub версию
                 setimagePath(item.images[0]);
@@ -36,20 +32,17 @@ const GoodItem = ({item}) => {
     }, []);
     
     return(
-        <>
-        {!isLoadingPic && (
-            <div className="col-4" >
-                <div className="card" key={uniqid()}>  
-                    {imagePath && <img src={imagePath} className="card-img-top img-fluid" alt={item.title}/>}
-                    <div className="card-body">
-                        <p className="card-text">{item.title}</p>
-                        <p className="card-text"><PriceFormat price={item.price}/></p>
-                        <a href={detailPagePath} className="btn btn-outline-primary">Заказать</a>
-                    </div>
-                </div>
+    <div className="col-4" >
+        <div className="card" key={uniqid()}> 
+            {isLoadingPic && <Preloader/>}
+            {imagePath && <img src={imagePath} className="card-img-top img-fluid" alt={item.title}/>}
+            <div className="card-body">
+                <p className="card-text">{item.title}</p>
+                <p className="card-text"><PriceFormat price={item.price}/></p>
+                <a href={detailPagePath} className="btn btn-outline-primary">Заказать</a>
             </div>
-        )}
-    </> 
+        </div>
+    </div>
     );
 }
 

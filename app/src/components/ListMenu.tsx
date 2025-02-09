@@ -4,11 +4,24 @@ const ListMenu = ({ menu, className }: { menu: { title: string; link: string }[]
   
     return (
       <ul className={className}>
-        {menu.map((item, index) => (
-          <li key={index} className="nav-item">
-            <NavLink to={item.link} className={classSelected}>{item.title}</NavLink>
-          </li>
-        ))}
+        {menu.map((item, index) => {
+          let rebootCatalogFilter = false;
+
+          if(item.link != '/catalog.html') {
+            rebootCatalogFilter = true;
+          }
+
+          return (
+            <li key={index} className="nav-item">
+              <NavLink 
+                to={item.link}
+                state={{ rebootCatalogFilter }} 
+                className={classSelected}>
+                  {item.title}
+              </NavLink>
+            </li>
+          );
+        })}
       </ul>
     );
 };

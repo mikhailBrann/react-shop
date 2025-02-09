@@ -105,7 +105,6 @@ export const catalogSectionSlice = createSliceWithThunk({
                         return;
                     }
                     
-
                     state.catalogList = [...state.catalogList, ...action.payload];
                     return;
                 },                
@@ -129,20 +128,11 @@ export const catalogSectionSlice = createSliceWithThunk({
         setCatalogCategoryList: (state, action: PayloadAction<any>) => {
             state.catalogCategoryList = action.payload;
         },
-
+        setCatalogListSearchQuery: (state, action: PayloadAction<string>) => {
+            state.catalogListSearchQuery = action.payload;
+        }
     })
 });
 
 export const { fetchCatalog } = catalogSectionSlice.actions;
 export default catalogSectionSlice.reducer;
-
-
-
-
-
-
-
-
-
-
-//CatalogSectionSlice

@@ -7,11 +7,13 @@ const CatalogCategories = () => {
     const { 
         catalogCategoryList, 
         catalogListCurrentCategory,
-        catalogListOffset 
+        catalogListOffset,
+        catalogListSearchQuery 
     } = useAppSelector((state) => state.catalogSection);
     const {
         setCatalogListCurrentCategory,
-        setCatalogListOffset
+        setCatalogListOffset,
+        setCatalogListSearchQuery
     } = catalogSectionSlice.actions;
     const dispatch = useAppDispatch();
     const getCategories = async () => {
@@ -25,7 +27,7 @@ const CatalogCategories = () => {
 
         dispatch(setCatalogListCurrentCategory(categoryId));
         dispatch(setCatalogListOffset(0));
-        dispatch(fetchCatalog(`offset=0&categoryId=${categoryId}`));
+        dispatch(fetchCatalog(`offset=0&categoryId=${categoryId}&q=${catalogListSearchQuery}`));
     }
 
     useEffect(() => {
