@@ -1,11 +1,13 @@
 import {useState} from "react";
-import { useNavigate } from 'react-router-dom';;
+import { useNavigate } from 'react-router-dom';
+import cartSlice from '../redux/slices/CartSlice';
+import { useAppSelector } from '../hooks/defaultHook.tsx';
 
 const Header = ({children}) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [showForm, setShowForm] = useState(false);
-    const [searchQueryTimeoutId, setSearchQueryTimeoutId] = useState(null|Number);
     const navigate = useNavigate();
+    const { cartCount } = useAppSelector((state) => state.cart);
 
     const handleSearchClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -17,9 +19,9 @@ const Header = ({children}) => {
         }
 
         if(searchQuery) {
-          navigate(`/catalog.html?searchQuery=${searchQuery}`);
           setShowForm(false);
           setSearchQuery('');
+          navigate(`/catalog.html?searchQuery=${searchQuery}`);
         }
     }
 
@@ -48,7 +50,7 @@ const Header = ({children}) => {
                       onClick={handleSearchClick}>
                     </div>
                     <div className="header-controls-pic header-controls-cart">
-                      <div className="header-controls-cart-full">1</div>
+                      { cartCount > 0 && (<div className="header-controls-cart-full">{cartCount}</div>)}
                       <div className="header-controls-cart-menu"></div>
                     </div>
                   </div>

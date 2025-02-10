@@ -44,15 +44,25 @@ const CatalogSection = ({children}) => {
         setSearchParams({});
     }
 
+    const setRebootCatalogFilter = (
+            catalogListCurrentCategory, 
+            catalogListSearchQuery, 
+            catalogListOffset
+        ) => {
+        dispatch(setCatalogListSearchQuery(""));
+        dispatch(setCatalogListOffset(0));
+        dispatch(setCatalogListCurrentCategory(catalogListCurrentCategory));
+        dispatch(fetchCatalog(`offset=${catalogListOffset}&categoryId=${catalogListCurrentCategory}&q=${catalogListSearchQuery}`));
+    }
+
     useEffect(() => {
         if (rebootCatalogFilter) {
-            dispatch(setCatalogListSearchQuery(""));
-            dispatch(setCatalogListOffset(0));
-            dispatch(setCatalogListCurrentCategory(catalogListCurrentCategory));
-            dispatch(fetchCatalog(`offset=${catalogListOffset}&categoryId=${catalogListCurrentCategory}&q=${catalogListSearchQuery}`));
+            setRebootCatalogFilter(catalogListCurrentCategory, catalogListSearchQuery, catalogListOffset);
         } else if (headerSearchQuery) {
             checkQueryParams(headerSearchQuery);
-        } 
+        } else {
+            dispatch(fetchCatalog(`offset=${catalogListOffset}&categoryId=${catalogListCurrentCategory}`));
+        }
     }, []);
 
 
