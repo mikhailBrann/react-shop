@@ -1,4 +1,3 @@
-import uniqid from 'uniqid';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Preloader from './Preloader';

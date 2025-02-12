@@ -19,7 +19,6 @@ const HeaderMenu = () => {
       }
     ];
   
-  
     return(
       <ListMenu menu={headerMenu} className="navbar-nav mr-auto" />
     );

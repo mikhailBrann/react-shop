@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import {  fetchCatalog, catalogSectionSlice } from "../redux/slices/CatalogSectionSlice";
+import { useState } from 'react';
+import { fetchCatalog, catalogSectionSlice } from "../redux/slices/CatalogSectionSlice";
 import { useAppDispatch, useAppSelector } from '../hooks/defaultHook.tsx';
 import CatalogSection from './CatalogSection';
 import CatalogCategories from './CatalogCategories';

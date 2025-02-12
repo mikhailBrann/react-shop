@@ -6,17 +6,12 @@ import Preloader from './Preloader';
 import ShowSKU from './ShowSKU';
 import { cartSlice } from '../redux/slices/CartSlice';
 
-
 const GoodDetailItem = ({item}) => {
     const [isLoadingPic, setIsLoadingPic] = useState(true);
     const [imagePath, setimagePath] = useState('');
     const [selectedSize, setSelectedSize] = useState('');
     const [goodCount, setGoodCount] = useState(1);
     const navigate = useNavigate();
-    const { 
-        cartList,
-        cartCount
-    } = useAppSelector((state) => state.cart);
     const {
         addItemToCartList,
         removeItemToCartList,
@@ -75,7 +70,6 @@ const GoodDetailItem = ({item}) => {
         }
     }
     const handleAddToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
-        const currentElem = event.currentTarget;
         const good = {
             id: item.id,
             title: item.title,

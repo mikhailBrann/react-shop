@@ -50,10 +50,16 @@ export const cartSlice = createSliceWithThunk({
             state.cartCount = state.cartList.length;
             localStorage.setItem('cartList', JSON.stringify(state.cartList));
             localStorage.setItem('cartCount', state.cartCount);
+        },
+        clearCartList: (state) => {
+            state.cartList = [];
+            state.cartCount = 0;
+            localStorage.setItem('cartList', JSON.stringify(state.cartList));
+            localStorage.setItem('cartCount', state.cartCount);
         }
     }
 });
 
-export const { addItemToCartList, removeItemToCartList } = cartSlice.actions;
+export const { addItemToCartList, removeItemToCartList, clearCartList } = cartSlice.actions;
 export default cartSlice.reducer;
 

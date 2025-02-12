@@ -1,6 +1,5 @@
 import {useState} from "react";
 import { useNavigate } from 'react-router-dom';
-import cartSlice from '../redux/slices/CartSlice';
 import { useAppSelector } from '../hooks/defaultHook.tsx';
 
 const Header = ({children}) => {
@@ -24,14 +23,12 @@ const Header = ({children}) => {
           navigate(`/catalog.html?searchQuery=${searchQuery}`);
         }
     }
-
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
         const newValue = event.currentTarget.value;
 
         setSearchQuery(newValue);
     }
-
 
     return (
       <header className="container">
