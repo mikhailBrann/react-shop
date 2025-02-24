@@ -8,9 +8,7 @@ const Header = ({children}) => {
     const navigate = useNavigate();
     const { cartCount } = useAppSelector((state) => state.cart);
 
-    const handleSearchClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-
+    const setSearchQueryHandler = () => {
         setShowForm(true);
 
         if(!searchQuery && showForm) {
@@ -20,9 +18,24 @@ const Header = ({children}) => {
         if(searchQuery) {
           setShowForm(false);
           setSearchQuery('');
-          navigate(`/catalog.html?searchQuery=${searchQuery}`);
+          navigate(`/catalog?searchQuery=${searchQuery}`);
         }
     }
+
+    const handleSearchClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        setSearchQueryHandler();
+    }
+
+    const handlePressKey = (event: React.KeyboardEvent) => {
+      if (event.key !== 'Enter') {
+        return;
+      }
+
+      event.preventDefault();
+      setSearchQueryHandler();
+    }
+
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
         const newValue = event.currentTarget.value;
@@ -31,7 +44,7 @@ const Header = ({children}) => {
     }
 
     return (
-      <header className="container">
+      <header className="container" onKeyPress={handlePressKey}>
         <div className="row">
           <div className="col">
             <nav className="navbar navbar-expand-sm navbar-light bg-light">

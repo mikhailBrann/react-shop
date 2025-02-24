@@ -3,15 +3,15 @@ const FooterMenu = () => {
     const footerMenu = [
       {
         title: 'О магазине',
-        link: '/about.html'
+        link: '/about'
       },
       {
         title: 'Каталог',
-        link: '/catalog.html'
+        link: '/catalog'
       },
       {
         title: 'Контакты',
-        link: '/contacts.html'
+        link: '/contacts'
       }
     ];
   

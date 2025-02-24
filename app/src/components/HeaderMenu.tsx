@@ -7,15 +7,15 @@ const HeaderMenu = () => {
       },
       {
         title: 'Каталог',
-        link: '/catalog.html'
+        link: '/catalog'
       },
       {
         title: 'О магазине',
-        link: '/about.html'
+        link: '/about'
       },
       {
         title: 'Контакты',
-        link: '/contacts.html'
+        link: '/contacts'
       }
     ];
   

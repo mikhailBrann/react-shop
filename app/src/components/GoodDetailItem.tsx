@@ -79,7 +79,7 @@ const GoodDetailItem = ({item}) => {
         };
 
         dispatch(addItemToCartList(good));
-        navigate(`/cart.html`);
+        navigate(`/cart`);
     }
 
     return (

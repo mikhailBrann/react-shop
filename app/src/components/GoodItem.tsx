@@ -4,7 +4,7 @@ import Preloader from './Preloader';
 import { useState, useEffect } from 'react';
 
 const GoodItem = ({item}) => {
-    const detailPagePath = `/products/${item.id}.html`;
+    const detailPagePath = `/products/${item.id}`;
     const [isLoadingPic, setIsLoadingPic] = useState(true);
     const [imagePath, setimagePath] = useState('');
 
@@ -32,7 +32,7 @@ const GoodItem = ({item}) => {
     }, []);
     
     return(
-    <div className="col-4" >
+    <div className="col-4 card__wrap" >
         <div className="card" key={uniqid()}> 
             {isLoadingPic && <Preloader/>}
             {imagePath && <img src={imagePath} className="card-img-top img-fluid" alt={item.title}/>}

@@ -70,7 +70,6 @@ const CatalogSection = ({children}) => {
         <section className="top-catalog">
             <h2 className="text-center">Каталог</h2>
             {children}
-            {catalogListLoading && (<Preloader/>)}
             {catalogListError && <p>{catalogListError}</p>}
             {catalogList.length > 0 && (
                 <>
@@ -79,10 +78,16 @@ const CatalogSection = ({children}) => {
                         <GoodItem item={item} key={uniqid()}/>     
                     ))}
                 </div>
-                    {catalogListMoreGoods && 
+                    {(catalogListMoreGoods && !catalogListLoading) &&
                     <ShowMoreButton onClick={handleShowMore} disabled={catalogListLoading}/>}
                 </>
             )}
+            {(catalogList.length <= 0 && !catalogListLoading) && (
+                <>
+                <h2>Товаров не найдено</h2>
+                </>
+            )}
+            {catalogListLoading && (<Preloader/>)}
         </section>
     );
 }

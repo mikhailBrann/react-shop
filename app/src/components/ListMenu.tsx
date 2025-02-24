@@ -14,7 +14,7 @@ const ListMenu = ({ menu, className }: { menu: { title: string; link: string }[]
         {menu.map((item, index) => {
           let rebootCatalogFilter = false;
 
-          if(item.link != '/catalog.html') {
+          if(item.link != '/catalog') {
             rebootCatalogFilter = true;
             dispatch(setCatalogListSearchQuery(''));
           }

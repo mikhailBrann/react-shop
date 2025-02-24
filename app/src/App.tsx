@@ -26,11 +26,11 @@ function App() {
       </Header>
       <Routes>
             <Route path="/" exact element={<IndexPage ><DefaultBanner/></IndexPage >} />
-            <Route path="/catalog.html" element={<CatalogPage><DefaultBanner/></CatalogPage>} />
-            <Route path="/products/:id.html" element={<GoodDetailPage><DefaultBanner/></GoodDetailPage>} />
-            <Route path="/cart.html" element={<CartPage/>} />
-            <Route path="/about.html" element={<AboutPage><DefaultBanner/></AboutPage>} />
-            <Route path="/contacts.html" element={<ContactsPage><DefaultBanner/></ContactsPage>} />
+            <Route path="/catalog" element={<CatalogPage><DefaultBanner/></CatalogPage>} />
+            <Route path="/products/:id" element={<GoodDetailPage><DefaultBanner/></GoodDetailPage>} />
+            <Route path="/cart" element={<CartPage/>} />
+            <Route path="/about" element={<AboutPage><DefaultBanner/></AboutPage>} />
+            <Route path="/contacts" element={<ContactsPage><DefaultBanner/></ContactsPage>} />
             <Route path='*' exact={true} element={<Page404><DefaultBanner/></Page404>} />
       </Routes>
       <Footer>

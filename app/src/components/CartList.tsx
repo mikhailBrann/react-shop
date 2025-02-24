@@ -38,7 +38,7 @@ const CartList = ({goodsList}) => {
             </thead>
             <tbody>
               {goodsList.map(good => {
-                const goodUrl = `/products/${good.id}.html`;
+                const goodUrl = `/products/${good.id}`;
                 const goodSum = good.price * good.quantity;
   
                 return (<tr key={uniqid()}>
