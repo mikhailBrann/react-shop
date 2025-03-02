@@ -20,8 +20,6 @@ const CatalogSearch = () => {
     const handleSearch = (event: React.InputHTMLAttributes<HTMLInputElement>) => {
         const newValue = event.currentTarget.value;
 
-        dispatch(setCatalogListSearchQuery(newValue));
-
         if(timeoutId) {
             clearTimeout(timeoutId);
         }
@@ -38,7 +36,7 @@ const CatalogSearch = () => {
             <input className="form-control" 
                 placeholder="Поиск"
                 onInput={handleSearch}
-                value={catalogListSearchQuery}
+                defaultValue={catalogListSearchQuery}
                 />
         </form>
     );

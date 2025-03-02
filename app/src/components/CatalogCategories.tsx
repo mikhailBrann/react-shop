@@ -1,9 +1,10 @@
 import uniqid from 'uniqid';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/defaultHook.tsx';
 import { fetchCatalog, catalogSectionSlice } from "../redux/slices/CatalogSectionSlice";
 
 const CatalogCategories = () => {
+    const [categoryRequestErr, setCategoryRequestErr] = useState(false);
     const { 
         catalogCategoryList, 
         catalogListCurrentCategory,
@@ -17,9 +18,15 @@ const CatalogCategories = () => {
     } = catalogSectionSlice.actions;
     const dispatch = useAppDispatch();
     const getCategories = async () => {
-        const request = await fetch(`${import.meta.env.VITE_API_URL}/api/categories`);
-        const response = await request.json();
-        dispatch(catalogSectionSlice.actions.setCatalogCategoryList(response));
+        setCategoryRequestErr(false);
+
+        try {
+            const request = await fetch(`${import.meta.env.VITE_API_URL}/api/categories`);
+            const response = await request.json();
+            dispatch(catalogSectionSlice.actions.setCatalogCategoryList(response));
+        } catch (error) {
+            setCategoryRequestErr(true);
+        }
     }
     const handleCategoryClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
         event.preventDefault();
@@ -37,7 +44,12 @@ const CatalogCategories = () => {
 
     return(
         <>
-        {catalogCategoryList?.length > 0 && (
+        {categoryRequestErr && (
+            <div className="alert alert-danger" role="alert">
+                Произошла ошибка при загрузке категорий
+            </div>
+        )}
+        {!categoryRequestErr && catalogCategoryList?.length > 0 && (
             <ul className="catalog-categories nav justify-content-center">
                 <li className="nav-item" key={uniqid()}>
                     <a className={catalogListCurrentCategory === 0 ? "nav-link active" : "nav-link"}  

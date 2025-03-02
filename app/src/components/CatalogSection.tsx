@@ -70,7 +70,7 @@ const CatalogSection = ({children}) => {
         <section className="top-catalog">
             <h2 className="text-center">Каталог</h2>
             {children}
-            {catalogListError && <p>{catalogListError}</p>}
+            {catalogListError && <><h2>{catalogListError}</h2></>}
             {catalogList.length > 0 && (
                 <>
                 <div className="row">
@@ -82,7 +82,7 @@ const CatalogSection = ({children}) => {
                     <ShowMoreButton onClick={handleShowMore} disabled={catalogListLoading}/>}
                 </>
             )}
-            {(catalogList.length <= 0 && !catalogListLoading) && (
+            {(catalogList.length <= 0 && !catalogListLoading && !catalogListError) && (
                 <>
                 <h2>Товаров не найдено</h2>
                 </>

@@ -109,7 +109,7 @@ export const catalogSectionSlice = createSliceWithThunk({
                     return;
                 },                
                 rejected: (state, action: PayloadAction<any>) => {
-                    state.catalogListError = action.payload as string;
+                    state.catalogListError = 'Ошибка загрузки каталога!';
                 },
                 settled: (state) => {
                     state.catalogListLoading = false;

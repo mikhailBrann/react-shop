@@ -30,7 +30,7 @@ const GoodDetailPage = ({children}) => {
               <div className="col">
                 {children}
                 {isLoading && <Preloader/>}
-                {error && (<p>Ошибка: {error?.message}</p>)}
+                {error && (<h2>Ошибка загрузки страницы!</h2>)}
                 {!error && Object.keys(good).length > 0 && <GoodDetailItem item={good}/>}
               </div>
           </div>
